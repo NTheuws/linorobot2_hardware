@@ -99,11 +99,11 @@ This is the sensor that'll be used to scan the surrouding area of the robot to b
 - [LD06 LIDAR](https://www.inno-maker.com/product/lidar-ld06/)
 - [YDLIDAR](https://www.ydlidar.com/lidars.html)
 - [XV11](http://xv11hacking.rohbotics.com/mainSpace/home.html)
-- * [Intel RealSense](https://www.intelrealsense.com/stereo-depth/) D435, D435i
-- * [Zed](https://www.stereolabs.com/zed)
-- * [Zed 2](https://www.stereolabs.com/zed-2)
-- * [Zed 2i](https://www.stereolabs.com/zed-2i)
-- * [Zed Mini](https://www.stereolabs.com/zed-mini) 
+- *[Intel RealSense](https://www.intelrealsense.com/stereo-depth/) D435, D435i
+- *[Zed](https://www.stereolabs.com/zed)
+- *[Zed 2](https://www.stereolabs.com/zed-2)
+- *[Zed 2i](https://www.stereolabs.com/zed-2i)
+- *[Zed Mini](https://www.stereolabs.com/zed-mini) 
 
 Sensors marked with an asterisk are depth sensors. If a depth sensor is used as a laser sensor, the launch files will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser scans. It is prefered to use an actual laser sensor with a 360° view, meaning the ones listen above without the asterisk.
 
@@ -111,14 +111,14 @@ Sensors marked with an asterisk are depth sensors. If a depth sensor is used as 
 
 This sensor will be mounted to the very front of the robot to give a view of what it's facing. The options that're supported are as follows:
 
--[Intel RealSense](https://www.intelrealsense.com/stereo-depth/) D435, D435i
--[Zed](https://www.stereolabs.com/zed)
--[Zed 2](https://www.stereolabs.com/zed-2)
--[Zed 2i](https://www.stereolabs.com/zed-2i)
--[Zed Mini](https://www.stereolabs.com/zed-mini)
--[OAK D](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d)
--[OAK D Lite](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1)
--[OAK-D Pro](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-pro)
+- [Intel RealSense](https://www.intelrealsense.com/stereo-depth/) D435, D435i
+- [Zed](https://www.stereolabs.com/zed)
+- [Zed 2](https://www.stereolabs.com/zed-2)
+- [Zed 2i](https://www.stereolabs.com/zed-2i)
+- [Zed Mini](https://www.stereolabs.com/zed-mini)
+- [OAK D](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d)
+- [OAK D Lite](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1)
+- [OAK-D Pro](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-pro)
 
 ### 1.7 Micro controller
 
