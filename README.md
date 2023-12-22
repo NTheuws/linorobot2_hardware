@@ -492,7 +492,7 @@ Echo IMU data:
 
 
 ## URDF
-Once the hardware is done, you can go back to [linorobot2]([https://github.com/linorobot/linorobot2#urdf](https://github.com/NTheuws/linorobot2_software/tree/humble?tab=readme-ov-file#urdf)) package and start defining the robot's URDF.
+Once the hardware is done, you can go back to [linorobot2](https://github.com/NTheuws/linorobot2_software/tree/humble?tab=readme-ov-file#urdf) package and start defining the robot's URDF.
 
 ## Troubleshooting Guide
 
