@@ -81,7 +81,7 @@ The motor drivers are configurable from the config file explained in the later p
 The motors will be powered through the motor drivers, this means there are no set requirements besides from them having encoders. Encoders allow the robot to more precisely measure the rotations of the wheels wheels allows the positioning and wayfinding to be more accurate. 
 Make sure the motor drivers can handle the amount of voltage and current the motors will need. In most cases each motor needs a driver to be used some drivers however, can handle 2 motors at once. 
 
-### 1.4nertial Measurement Unit (IMU)
+### 1.4 Inertial Measurement Unit (IMU)
 
 The IMU is responsible for measuring the speed and direction at which the robot is moving. Together with the motor encoders it'll determine the current place the robot is within the area.
 Supported IMUs:
@@ -197,15 +197,19 @@ For bigger robots, you can add an emergency switch in between the motor drivers'
 ## Installation
 All software mentioned in this guide must be installed on the robot computer.
 
-### 1. ROS2 and linorobot2 installation
+### 1. Linux
+
+First things first, you want to select a ROS2 distro. The ones that're available and compatible with the robot are shown at the top. [This site](https://docs.ros.org/en/humble/Releases.html) has all the ROS2 distro's shown. Go to the page of the one you want to use, go to supported platforms and pick the one you want to use.
+
+### 2. ROS2 and linorobot2 installation
 It is assumed that you already have ROS2 and linorobot2 package installed. If you haven't, go to [linorobot2](https://github.com/linorobot/linorobot2) package for installation guide.
 
-### 2. Download linorobot2_hardware
+### 3. Download linorobot2_hardware
 
     cd $HOME
     git clone https://github.com/linorobot/linorobot2_hardware -b $ROS_DISTRO
 
-### 3. Install PlatformIO
+### 4. Install PlatformIO
 Download and install platformio. [Platformio](https://platformio.org/) allows you to develop, configure, and upload the firmware without the Arduino IDE. This means that you can upload the firmware remotely which is ideal on headless setup especially when all components have already been fixed. 
     
     curl -fsSL -o get-platformio.py https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py
@@ -216,7 +220,7 @@ Add platformio to your $PATH:
     echo "PATH=\"\$PATH:\$HOME/.platformio/penv/bin\"" >> $HOME/.bashrc
     source $HOME/.bashrc
 
-### 4. UDEV Rule
+### 5. UDEV Rule
 Download the udev rules from Teensy's website:
 
     wget https://www.pjrc.com/teensy/00-teensy.rules
@@ -225,7 +229,7 @@ and copy the file to /etc/udev/rules.d :
 
     sudo cp 00-teensy.rules /etc/udev/rules.d/
 
-### 5. Install Screen Terminal
+### 6. Install Screen Terminal
 
     sudo apt install screen
 
