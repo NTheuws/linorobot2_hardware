@@ -492,33 +492,49 @@ Echo IMU data:
 
 
 ## URDF
-Once the hardware is done, you can go back to [linorobot2](https://github.com/linorobot/linorobot2#urdf) package and start defining the robot's URDF.
+Once the hardware is done, you can go back to [linorobot2]([https://github.com/linorobot/linorobot2#urdf](https://github.com/NTheuws/linorobot2_software/tree/humble?tab=readme-ov-file#urdf)) package and start defining the robot's URDF.
 
 ## Troubleshooting Guide
 
 ### 1. One of my motor isn't spinning.
 - Check if the motors are powered.
 - Check if you have bad wiring.
-- Check if you have misconfigured the motor's pin assignment in lino_base_config.h.
+- Check if you have misconfigured the motor's pin assignment in `lino_base_config.h`.
 - Check if you uncommented the correct motor driver (ie. `USE_GENERIC_2_IN_MOTOR_DRIVER`)
 - Check if you assigned the motor driver pins under the correct motor driver constant. For instance, if you uncommented `USE_GENERIC_2_IN_MOTOR_DRIVER`, all the pins you assigned must be inside the `ifdef USE_GENERIC_2_IN_MOTOR_DRIVER` macro.
 
 ### 2. Wrong wheel is spinning during calibration process
 - Check if the motor drivers have been connected to the correct microcontroller pin.
-- Check if you have misconfigured the motor's pin assignment in lino_base_config.h.
+- Check if you have misconfigured the motor's pin assignment in `lino_base_config.h`.
 
-### 3 One of my encoders has no reading (0 value).
+### 3. When calibrating wheels, multiple are spinning at the same time.
+-	Make sure the correct motor driver is chosen in `linorobot2_hardware/config/lino_base_config.h`.
+-	Make sure the wiring is the same as the pinout in `linorobot2_hardware/config/lino_base_config.h`.
+-	Make sure the wiring through the motor driver corresponds to the correct motor.
+-	Make sure the PWM and DIR pins aren’t swapped.
+
+### 4. Wheels are spinning in the wrong direction.
+-	In the `linorobot2_hardware/config/lino_base_config.h` file there is a variable called `motor<x>_inv` this is used to invert the direction. X is the motor number from front left being 1 and back right being 4. If the wheel is moving the correct way, leave this be. In case it goes the other way, flip the variable of the specific motor.
+
+### 5. The wheels only spin in one direction
+- Check if the Teensy's GND pin is connected to the motor driver's GND pin.
+
+### 6. The motor doesn't change it's direction after setting the INV to true.
+- Check if the Teensy's GND pin is connected to the motor driver's GND pin.
+
+### 7. One of my encoders has no reading (0 value).
 - Check if the encoders are powered.
 - Check if you have bad wiring.
-- Check if you have misconfigured the encoder's pin assignment in lino_base_config.h.
+- Check if you have misconfigured the encoder's pin assignment in `lino_base_config.h`.
 
-### 4. The wheels only spin in one direction
-- Check if the Teensy's GND pin is connected to the motor driver's GND pin.
+### 8. The encoders are reading a negative value.
+-	Enable/disable this value in linorobot2_hardware/config/lino_base_config.h on the right place, this is documented with comments in the file. Make sure to do this for the right motor driver used.
 
-### 5. The motor doesn't change it's direction after setting the INV to true.
-- Check if the Teensy's GND pin is connected to the motor driver's GND pin.
+### 9. Some of the encoders are reading a very low value.
+-	Make sure the wiring of the encoder's + and – are correctly connected.
+-	They may be switched around.
 
-### 6. Nothing's printing when I run the screen app.
+### 10. Nothing's printing when I run the screen app.
 - Check if you're passing the correct serial port. Run:
 
         ls /dev/ttyACM*
@@ -531,14 +547,57 @@ Once the hardware is done, you can go back to [linorobot2](https://github.com/li
 
     Remember to restart your computer if you just copied the udev rule.
 
-### 7. The firmware was uploaded but nothing's happening.
+### 11. The firmware was uploaded but nothing's happening.
 - Check if you're assigning the correct Teensy board when uploading the firmware. If you're unsure which Teensy board you're using, take a look at the label on the biggest chip found in your Teensy board and compare it with the boards shown on PJRC's [website](https://www.pjrc.com/teensy/).
 
-### 8. The robot's forward motion is not straight
+### 12. The robot's forward motion is not straight
 - This happens when the target velocity is more than or equal the motor's RPM (usually happens on low RPM motors). To fix this, set the `MAX_RPM_RATIO` lower to allow the PID controller to compensate for errors.
 
-### 9. The robot rotates after braking
+### 13. Micro_ros_agent package isn’t recognized.
+-	Make sure you’re in the right directory: linorobot2_ws.
+-	Try to reinstall the following:
+  ```
+    source /opt/ros/<ros_distro>/setup.bash
+    cd /tmp
+    wget https://raw.githubusercontent.com/linorobot/linorobot2/${ROS_DISTRO}/install_linorobot2.bash
+    bash install_linorobot2.bash <robot_type> <laser_sensor> <depth_sensor>
+    source ~/.bashrc
+```
+
+   The agent is included in this install. In case the terminal decides to close itself follow. 
+
+### 14. Terminal shuts down during installation of the firmware.
+-	Did the raspberry run out of memory? 
+    - Limit the number of parallel processes by using: `--parallel-workers` and/or `--executor sequential`.
+    - Using swap memory.
+    - In case you’re using a visual version of Ubuntu, disable this. `sudo systemct1 set-default multi-user` followed by a reboot. This disables it which means the Raspberry will be terminal based.
+
+### 15. Raspberry Pi restarts itself (endless loop).
+-	When starting the Raspberry, observe the red LED. If this turns off it is highly likely that the voltage is too low. The average current a Raspberry 3B should have is 2,5A so make sure this is also not the issue.
+
+### 16. Can’t upload firmware to teensy.
+-	Make sure the wire connecting the Raspberry with the teensy is a data-cable and not just a charger.
+-	Make sure you’re uploading from the right directory on the Raspberry.
+
+### 17. Error during the uploading of the firmware.
+-	Press the reset button on the teensy and try again.
+
+### 18.	Can’t run teleop_twist_keyboard since the terminal is in use.
+-	Open a different terminal (`ctrl+alt+f2`) and run the command there. Switching between terminals is done with `ctrl+alt+f1` / `ctrl+alt+f2`.
+
+### 19. Not all topics are present during topic check.
+-	Make sure the micro_ros_agent is running.
+-	Make sure the teleop_twist_keyboard is running.
+
+### 20. The robot rotates after braking
 - This happens due to the same reason as 7. When the motor hits its maximum rpm and fails to reach the target velocity, the PID controller's error continously increases. The abrupt turning motion is due to the PID controller's attempt to further compensate the accumulated error. To fix this, set the `MAX_RPM_RATIO` lower to allow the PID controller to compensate for errors while moving to avoid huge accumulative errors when the robot stops.
+
+### 21. Can’t connect to the robot computer.
+-	Make sure ssh is enabled on the robot computer.
+    - To enable it use: `sudo systemctl enable ssh`.
+        - If it isn’t installed use: `sudo apt install openssh-server`.
+-	Make sure the IP of the robot user is correct.
+-	Make sure the user of the robot computer is correct.
 
 ## Developers
 #### Adding firmware compilation tests for a new ROS distro
