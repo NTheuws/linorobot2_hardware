@@ -7,6 +7,8 @@ ROS 2 Distro | Branch | Build status
 **Galactic** | [`galactic`](../../tree/galactic) | [![Galactic Firmware Build](../../actions/workflows/galactic-firmware-build.yml/badge.svg?branch=galactic)](../../actions/workflows/galactic-firmware-build.yml?branch=galactic)
 **Foxy** | [`foxy`](../../tree/foxy) | [![Foxy Firmware Build](../../actions/workflows/foxy-firmware-build.yml/badge.svg?branch=foxy)](../../actions/workflows/foxy-firmware-build.yml?branch=foxy)
 
+
+
 ## Installation
 All software mentioned in this guide must be installed on the robot computer.
 
@@ -44,7 +46,28 @@ and copy the file to /etc/udev/rules.d :
 
 ## Building the robot
 
-### 1. Robot orientation
+### 1. Part overview
+
+If you're planning on building a robot, you'll be requiring a set amount of parts. This will give an overview and sort of checklist to see if you haven't missed anything when gathering the hardware.
+
+- Wheels
+- Motor drivers
+- Motors
+- Ineartial Measurement Unit (IMU)
+- Laser sensor
+- Depth sensor
+- Micro controller
+- Robot computer
+- Battery
+- Robot body
+- Connection cables
+
+### 1. Robot types and orientation
+There are 3 different types of robots
+- 2 Wheel drive (2WD)
+- 4 Wheel drive (4WD)
+- Mecanum
+
 Robot Orientation:
 
 -------------FRONT-------------
@@ -55,9 +78,12 @@ WHEEL3 WHEEL4 (4WD)
 
 --------------BACK--------------
 
-If you're building a 2 wheel drive robot, assign `MOTOR1` and `MOTOR2` to the left and right motors respectively.
+In case you're building a 2WD robot, use the front 2 wheels. Assign `MOTOR1` and `MOTOR2` to the left and right motors respectively. For the robot to drive properly, 1 or 2 caster wheels are used to keep the balance without being in the way of the robot's movement.
+For a 4WD and Mecanum robot all 4 motors will be used.
 
-For mecanum robots, follow the wheels' orientation below.
+For mecanum robots, the wheels' orientation is very important. When looking at the robot from the top, the rollers on the wheels have to point towards the center of the robot. This should automatically mean the rollers on the bottom of the wheels should form a diamond shape. 
+
+The image below shows the top view of a robot. In case of mecanum wheels, it also shows the orientation of the rollers on the 4 wheels. The arrows show the X and Y-axis for the Inertial Measurement Unit(IMU) make sure these will be alligned later.
 
 ![mecanum_wheels_orientation](docs/mecanum_wheels_orientation.png)
 
@@ -75,14 +101,79 @@ Supported Motor Drivers:
 
 The motor drivers are configurable from the config file explained in the later part of this document.
 
+### 3. Motors
+
+The motors will be powered through the motor drivers, this means there are no set requirements besides from them having encoders. Encoders allow the robot to more precisely measure the rotations of the wheels wheels allows the positioning and wayfinding to be more accurate. 
+Make sure the motor drivers can handle the amount of voltage and current the motors will need. In most cases each motor needs a driver to be used some drivers however, can handle 2 motors at once. 
+
 ### 3. Inertial Measurement Unit (IMU)
 
+The IMU is responsible for measuring the speed and direction at which the robot is moving. Together with the motor encoders it'll determine the current place the robot is within the area.
 Supported IMUs:
 
 - **GY-85**
 - **MPU6050**
 - **MPU9150**
 - **MPU9250**
+
+### 4. Laser sensor
+
+This is the sensor that'll be used to scan the surrouding area of the robot to be able to create a map. The supported options are:
+
+- [RP LIDAR A1](https://www.slamtec.com/en/Lidar/A1)
+- [LD06 LIDAR](https://www.inno-maker.com/product/lidar-ld06/)
+- [YDLIDAR](https://www.ydlidar.com/lidars.html)
+- [XV11](http://xv11hacking.rohbotics.com/mainSpace/home.html)
+- * [Intel RealSense](https://www.intelrealsense.com/stereo-depth/) D435, D435i
+- * [Zed](https://www.stereolabs.com/zed)
+- * [Zed 2](https://www.stereolabs.com/zed-2)
+- * [Zed 2i](https://www.stereolabs.com/zed-2i)
+- * [Zed Mini](https://www.stereolabs.com/zed-mini) 
+
+Sensors marked with an asterisk are depth sensors. If a depth sensor is used as a laser sensor, the launch files will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser scans. It is prefered to use an actual laser sensor with a 360° view, meaning the ones listen above without the asterisk.
+
+### 5. Depth sensor
+
+This sensor will be mounted to the very front of the robot to give a view of what it's facing. The options that're supported are as follows:
+
+-[Intel RealSense](https://www.intelrealsense.com/stereo-depth/) D435, D435i
+-[Zed](https://www.stereolabs.com/zed)
+-[Zed 2](https://www.stereolabs.com/zed-2)
+-[Zed 2i](https://www.stereolabs.com/zed-2i)
+-[Zed Mini](https://www.stereolabs.com/zed-mini)
+-[OAK D](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d)
+-[OAK D Lite](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1)
+-[OAK-D Pro](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-pro)
+
+### 6. Micro controller
+
+The micro controller will be responsible for the motors and and IMU. The ones that're supported are:
+
+- Teensy 3.1
+- Teensy 3.5
+- Teensy 3.6
+- Teensy 4.0
+- Teensy 4.1
+
+### 7. Robot computer
+
+This is what will be running the ROS2 package and uploads the necessary files to the micro controller. Later on a connection will be set up for you to be able to interact with this remotely. The ones that're supported are: 
+
+- Jetson TK1
+- Jetson TX1
+- Raspberry Pi 3B+
+- Odroid XU4
+- Radxa Rock Pro
+
+### 8. Battery
+
+The battery of the robot has no requirements which means anything can be used as long as it gives enough power for the robot to run. For ease of use, make sure it's either rechargeable or easily accessible to be able to swap it in case it's empty.
+In case you're building a robot which doesn't use 5V for the motors it's neccesary to create a way to both power the robot computer and the motors. This can be done with for example a stepdown converter. There's also a posibility to add a switch to the robot, this can then be used to turn the power to the robot computer on and off.
+
+### 9. Robot body
+
+For this there are no set requirements either, in essence everyone creates their own variant on the Linorobot2. This means everyone has a different robot designed for their own needs. When it comes to deciding on what to use for the robot's body, it's good to think about the necessary space that's required for the selected hardware. Also something to keep in mind is the ability to attach the motors and sensors to the robot in a way that they're not able to move from their position.
+
 
 ### 4. Connection Diagram
 Below are connection diagrams you can follow for each supported motor driver and IMU. For simplicity, only one motor connection is provided but the same diagram can be used to connect the rest of the motors. You are free to decide which microcontroller pin to use just ensure that the following are met:
