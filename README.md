@@ -199,10 +199,10 @@ All software mentioned in this guide must be installed on the robot computer.
 
 ### 1. Linux
 
-First things first, you want to select a ROS2 distro. The ones that're available and compatible with the robot are shown at the top. [This site](https://docs.ros.org/en/humble/Releases.html) has all the ROS2 distro's shown. Go to the page of the one you want to use, go to supported platforms and pick the one you want to use.
+First things first, you want to select a ROS2 distro. The ones that're available and compatible with the robot are shown at the top. [This site](https://docs.ros.org/en/humble/Releases.html) has all the ROS2 distro's shown. Go to the page of the one you want to use, go to supported platforms and pick the one you want to use. Make sure to use a version that doesn't have a GUI included, in case of Ubuntu for example you can download the server variant. If you've gotten one with GUI anyway, this can still be disabled. Go to [Troubleshooting Guide](#troubleshooting-guide) for a fix.
 
 ### 2. ROS2 and linorobot2 installation
-It is assumed that you already have ROS2 and linorobot2 package installed. If you haven't, go to [linorobot2](https://github.com/linorobot/linorobot2) package for installation guide.
+It is assumed that you already have ROS2 and linorobot2 package installed. If you haven't, go to [linorobot2](https://github.com/NTheuws/linorobot2_software) package for installation guide. In here follow all steps until you're referd back to the hardware/this page.
 
 ### 3. Download linorobot2_hardware
 
@@ -387,7 +387,7 @@ Constants' Meaning:
 - **MOTORX_INV** - Flag used to invert the direction of the motor. More on that later.
 
 ## Calibration
-Before proceeding, **ensure that your robot is elevated and the wheels aren't touching the ground**. 
+Before proceeding, **ensure that your robot is elevated and the wheels aren't touching the ground**. The wheels will spin in order to see if they work or not. If they're touching a surface the robot will start moving.
 5.1
 ### 1. Motor Check
 Go to calibration folder and upload the firmware:
@@ -412,7 +412,7 @@ Start spinning the motors by running:
 
 On the terminal type `spin` and press the enter key.
 
-The wheels will spin one by one for 10 seconds from Motor1 to Motor4. Check if each wheel's direction is spinning **forward** and take note of the motors that are spinning in the opposite direction. Set MOTORX_INV constant in [lino_base_config.h](https://github.com/linorobot/linorobot2_hardware/blob/master/config/lino_base_config.h#L71-L74) to `true` to invert the motor's direction. Reupload the calibration firmware once you're done. Press `Ctrl` + `a` + `d` to exit the screen terminal.
+The wheels will spin one by one for 10 seconds from Motor1 to Motor4. Check if each wheel's direction is spinning **forward** and take note of the motors that are spinning in the opposite direction. Set MOTORX_INV constant in [lino_base_config.h](https://github.com/linorobot/linorobot2_hardware/blob/master/config/lino_base_config.h#L71-L74) to `true` to invert the motor's direction. Reupload the calibration firmware once you're done. Press `Ctrl` + `a` + `d` to exit the screen terminal. Only go to the next step in case all motors are spinning and are spinning in the correct direction which is forwards.
 
     cd linorobot2_hardware/calibration
     pio run --target upload -e <your_teensy_board>
@@ -437,9 +437,15 @@ Type `sample` and press the enter key. Verify if all encoder values are now **po
 
 On the previous instruction where you check the encoder reads for each motor, you'll see that there's also COUNTS PER REVOLUTION values printed on the screen. If you have defined `MOTOR_OPERATING_VOLTAGE` and `MOTOR_POWER_MEASURED_VOLTAGE`, you can assign these values to `COUNTS_PER_REVX` constants in [lino_base_config.h](https://github.com/linorobot/linorobot2_hardware/blob/master/config/lino_base_config.h#L55-L58) to have a more accurate model of the encoder.
 
+### 4. Create a connection point on the robot computer
+
+To be able to work on another computer instead of the robot one, it's needed to create a way to do so. For this one of the options is an SSH connection. To enable this use `sudo systemctl enable ssh` on the robot computer followed by `sudo systemctl start ssh` to start it. From the other computer you can connect to this. `ssh <username>@<host_ip_address>` where `<username>` refers to the robot computers username and `<host_ip_address>` to the IP address of the robot computer. 
+
+An easy way of testing this would be to follow the steps from the motor check. Make sure to use the terminal in which you've connected to the robot computer.
+
 ## Upload the firmware
 Ensure that the robot pass all the requirements before uploading the firmware:
-
+These can all either be found in the [lino_base_config.h](https://github.com/linorobot/linorobot2_hardware/blob/master/config/lino_base_config.h#L55-L58) or have to do with the motor tests from before.
 - Defined the correct motor rpm.
 - Motors' IDs are correct.
 - Motors spin in the right direction.
@@ -576,27 +582,30 @@ Once the hardware is done, you can go back to [linorobot2](https://github.com/NT
     - Using swap memory.
     - In case you’re using a visual version of Ubuntu, disable this. `sudo systemct1 set-default multi-user` followed by a reboot. This disables it which means the Raspberry will be terminal based.
 
-### 15. Raspberry Pi restarts itself (endless loop).
+### 15. How do you remove the GUI on the robot computer?
+- To turn it off, you can simple put `sudo systemct1 set-default multi-user` into the terminal and follow this up with a reboot to apply the changes immediately.
+
+### 16. Raspberry Pi restarts itself (endless loop).
 -	When starting the Raspberry, observe the red LED. If this turns off it is highly likely that the voltage is too low. The average current a Raspberry 3B should have is 2,5A so make sure this is also not the issue.
 
-### 16. Can’t upload firmware to teensy.
+### 17. Can’t upload firmware to teensy.
 -	Make sure the wire connecting the Raspberry with the teensy is a data-cable and not just a charger.
 -	Make sure you’re uploading from the right directory on the Raspberry.
 
-### 17. Error during the uploading of the firmware.
+### 18. Error during the uploading of the firmware.
 -	Press the reset button on the teensy and try again.
 
-### 18.	Can’t run teleop_twist_keyboard since the terminal is in use.
+### 19.	Can’t run teleop_twist_keyboard since the terminal is in use.
 -	Open a different terminal (`ctrl+alt+f2`) and run the command there. Switching between terminals is done with `ctrl+alt+f1` / `ctrl+alt+f2`.
 
-### 19. Not all topics are present during topic check.
+### 20. Not all topics are present during topic check.
 -	Make sure the micro_ros_agent is running.
 -	Make sure the teleop_twist_keyboard is running.
 
-### 20. The robot rotates after braking
+### 21. The robot rotates after braking
 - This happens due to the same reason as 7. When the motor hits its maximum rpm and fails to reach the target velocity, the PID controller's error continously increases. The abrupt turning motion is due to the PID controller's attempt to further compensate the accumulated error. To fix this, set the `MAX_RPM_RATIO` lower to allow the PID controller to compensate for errors while moving to avoid huge accumulative errors when the robot stops.
 
-### 21. Can’t connect to the robot computer.
+### 22. Can’t connect to the robot computer.
 -	Make sure ssh is enabled on the robot computer.
     - To enable it use: `sudo systemctl enable ssh`.
         - If it isn’t installed use: `sudo apt install openssh-server`.
