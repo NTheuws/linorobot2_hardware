@@ -8,7 +8,7 @@ ROS 2 Distro | Branch | Build status
 **Foxy** | [`foxy`](../../tree/foxy) | [![Foxy Firmware Build](../../actions/workflows/foxy-firmware-build.yml/badge.svg?branch=foxy)](../../actions/workflows/foxy-firmware-build.yml?branch=foxy)
 
 ## Table of Contents  
-- [Building the robot](#building-the-robot)
+- [Linorobot2](#linorobot2)
 - [Installation](#installation)
 - [Setting up the firmware](#setting-up-the-firmware)
 - [Calibration](#calibration)
@@ -16,10 +16,12 @@ ROS 2 Distro | Branch | Build status
 - [Testing the robot](#testing-the-robot)
 - [URDF](#urdf)
 - [Troubleshooting Guide](#troubleshooting-guide)
-  
-## Building the robot
 
-This will list all necessary parts for the robot and further describe the options within each category followed by examples of what the result could look like. 
+## Linorobot2
+
+This repository is the second part of the Linorobot2 package. The first part describes the application for this project and how you're able to start out, it can be found [here](https://github.com/NTheuws/linorobot2_software). 
+
+Since this is a DIY robot, the hardware will have to be selected yourself. However, this package has a list of supported options from which the choices will have to be made. All available options are listed below.
 
 ### 1. Part overview
 
