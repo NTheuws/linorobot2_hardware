@@ -508,7 +508,7 @@ Once the hardware is done, you can go back to [linorobot2](https://github.com/NT
 
 ## Troubleshooting Guide
 
-Down below the most encountered problems will be described with most likely the solution. In case the issue isnt described, look at the troubleshotting guide on the [software page](https://github.com/NTheuws/linorobot2_software#troubleshooting-guide). 
+Down below the most encountered problems during the configuration of the Linorobot2 will be described with the most likely the solution(s). In case the issue isnt described, look at the troubleshotting guide on the [software page](https://github.com/NTheuws/linorobot2_software#troubleshooting-guide). 
 
 ### 1. One of my motor isn't spinning.
 - Check if the motors are powered.
