@@ -203,7 +203,7 @@ All software mentioned in this guide must be installed on the robot computer.
 
 ### 1. Linux
 
-First things first, you want to select a ROS2 distro. The ones that're available and compatible with the robot are shown at the top. [This site](https://docs.ros.org/en/humble/Releases.html) has all the ROS2 distro's shown. Go to the page of the one you want to use, go to supported platforms and pick the one you want to use. Make sure to use a version that doesn't have a GUI included, in case of Ubuntu for example you can download the server variant. If you've gotten one with GUI anyway, this can still be disabled. Go to [Troubleshooting Guide](#troubleshooting-guide) for a fix.
+First things first, you want to select a ROS2 distro. The ones that're available and compatible with the robot are shown at the top. [This site](https://docs.ros.org/en/humble/Releases.html) has all the ROS2 distro's shown. Go to the page of the one you want to use. Go to supported platforms and pick the one you want to use. Make sure to use a version that doesn't have a GUI included. In case of Ubuntu for example, you can download the server variant. If you've gotten one with GUI anyway, this can still be disabled. Go to [Troubleshooting Guide](#troubleshooting-guide) for a fix.
 
 ### 2. ROS2 and linorobot2 installation
 It is assumed that you already have ROS2 and linorobot2 package installed. If you haven't, go to [linorobot2](https://github.com/NTheuws/linorobot2_software) package for installation guide. In here follow all steps until you're referd back to the hardware/this page.
