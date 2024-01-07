@@ -25,7 +25,7 @@ Since this is a DIY robot, the hardware will have to be selected yourself. Howev
 
 ### 1. Part overview
 
-If you're planning on building a robot, you'll be requiring a set amount of parts. This will give an overview and sort of checklist to see if you haven't missed anything when gathering the hardware.
+If you're planning on building a robot, you'll be requiring an amount of components. This will give an overview and sort of checklist to see if you haven't missed anything when gathering the hardware. Each of these parts will have their supported options explained direclty below this list: 
 
 - Wheels
 - Motor drivers
