@@ -83,7 +83,7 @@ The motor drivers are configurable from the config file explained in the later p
 ### 1.3 Motors
 
 The motors will be powered through the motor drivers, this means there are no set requirements besides from them having encoders. Encoders allow the robot to more precisely measure the rotations of the wheels wheels allows the positioning and wayfinding to be more accurate. 
-Make sure the motor drivers can handle the amount of voltage and current the motors will need. In most cases each motor needs a driver to be used some drivers however, can handle 2 motors at once. 
+Make sure the motor drivers can handle the amount of voltage and current the motors will need. In most cases each motor needs a driver to be used. Some drivers however, can handle 2 motors at once. 
 
 ### 1.4 Inertial Measurement Unit (IMU)
 
@@ -109,7 +109,7 @@ This is the sensor that'll be used to scan the surrouding area of the robot to b
 - *[Zed 2i](https://www.stereolabs.com/zed-2i)
 - *[Zed Mini](https://www.stereolabs.com/zed-mini) 
 
-Sensors marked with an asterisk are depth sensors. If a depth sensor is used as a laser sensor, the launch files will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser scans. It is prefered to use an actual laser sensor with a 360° view, meaning the ones listen above without the asterisk.
+Sensors marked with an asterisk are depth sensors. If a depth sensor is used as a laser sensor, the launch files will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser scans. It is prefered to use an actual laser sensor with a 360° view, meaning the ones listed above without the asterisk.
 
 ### 1.6 Depth sensor
 
@@ -147,11 +147,11 @@ This is what will be running the ROS2 package and uploads the necessary files to
 ### 1.9 Battery
 
 The battery of the robot has no requirements which means anything can be used as long as it gives enough power for the robot to run. For ease of use, make sure it's either rechargeable or easily accessible to be able to swap it in case it's empty.
-In case you're building a robot which doesn't use 5V for the motors it's neccesary to create a way to both power the robot computer and the motors. This can be done with for example a stepdown converter. There's also a posibility to add a switch to the robot, this can then be used to turn the power to the robot computer on and off.
+In case you're building a robot which doesn't use 5V for the motors it's neccesary to create a way to both power the robot computer and the motors. This can be done with, for example, a stepdown converter. There's also a posibility to add a switch to the robot, this can then be used to turn the power to the robot computer on and off.
 
 ### 1.10 Robot body
 
-For this there are no set requirements either, in essence everyone creates their own variant on the Linorobot2. This means everyone has a different robot designed for their own needs. When it comes to deciding on what to use for the robot's body, it's good to think about the necessary space that's required for the selected hardware. Also something to keep in mind is the ability to attach the motors and sensors to the robot in a way that they're not able to move from their position.
+For this there are no set requirements either, in essence everyone creates their own variant on the Linorobot2. This means everyone has a different robot designed for their own needs. When it comes to deciding on what to use for the robot's body, it's good to think about the necessary space that's required for the selected hardware. Also something to keep in mind is to be able to attach the motors and sensors to the robot in a way that they're not able to move from their position.
 
 
 ### 2 Connection Diagram
@@ -523,7 +523,7 @@ Down below the most encountered problems during the configuration of the Linorob
 - Check if the motor drivers have been connected to the correct microcontroller pin.
 - Check if you have misconfigured the motor's pin assignment in `lino_base_config.h`.
 
-### 3. When calibrating wheels, multiple are spinning at the same time.
+### 3. Multiple wheels are spinning at the same time, when calibrating.
 -	Make sure the correct motor driver is chosen in `linorobot2_hardware/config/lino_base_config.h`.
 -	Make sure the wiring is the same as the pinout in `linorobot2_hardware/config/lino_base_config.h`.
 -	Make sure the wiring through the motor driver corresponds to the correct motor.
