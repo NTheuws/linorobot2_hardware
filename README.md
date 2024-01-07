@@ -1,3 +1,21 @@
+## Linorobot2
+
+This repository is the second part of the Linorobot2 package. The first part describes the application for this project and how you're able to start out, it can be found [here](https://github.com/NTheuws/linorobot2_software). 
+
+Since this is a DIY robot, the hardware will have to be selected yourself. However, this package has a list of supported options from which the choices will have to be made. All available options are listed below.
+
+## Table of Contents  
+- [Linorobot2](#linorobot2)
+- [Build status](#build-status)
+- [Part overview](#part-overview)
+- [Installation](#installation)
+- [Setting up the firmware](#setting-up-the-firmware)
+- [Calibration](#calibration)
+- [Upload the firmware](#upload-the-firmware)
+- [Testing the robot](#testing-the-robot)
+- [URDF](#urdf)
+- [Troubleshooting Guide](#troubleshooting-guide)
+  
 ## Build status
 <!-- Build Status populated by Github Actions runs -->
 ROS 2 Distro | Branch | Build status
@@ -7,23 +25,7 @@ ROS 2 Distro | Branch | Build status
 **Galactic** | [`galactic`](../../tree/galactic) | [![Galactic Firmware Build](../../actions/workflows/galactic-firmware-build.yml/badge.svg?branch=galactic)](../../actions/workflows/galactic-firmware-build.yml?branch=galactic)
 **Foxy** | [`foxy`](../../tree/foxy) | [![Foxy Firmware Build](../../actions/workflows/foxy-firmware-build.yml/badge.svg?branch=foxy)](../../actions/workflows/foxy-firmware-build.yml?branch=foxy)
 
-## Table of Contents  
-- [Linorobot2](#linorobot2)
-- [Installation](#installation)
-- [Setting up the firmware](#setting-up-the-firmware)
-- [Calibration](#calibration)
-- [Upload the firmware](#upload-the-firmware)
-- [Testing the robot](#testing-the-robot)
-- [URDF](#urdf)
-- [Troubleshooting Guide](#troubleshooting-guide)
-
-## Linorobot2
-
-This repository is the second part of the Linorobot2 package. The first part describes the application for this project and how you're able to start out, it can be found [here](https://github.com/NTheuws/linorobot2_software). 
-
-Since this is a DIY robot, the hardware will have to be selected yourself. However, this package has a list of supported options from which the choices will have to be made. All available options are listed below.
-
-### 1. Part overview
+## Part overview
 
 If you're planning on building a robot, you'll be requiring an amount of components. This will give an overview and sort of checklist to see if you haven't missed anything when gathering the hardware. Each of these parts will have their supported options explained direclty below this list: 
 
