@@ -8,6 +8,7 @@ Since this is a DIY robot, the hardware will have to be selected yourself. Howev
 - [Linorobot2](#linorobot2)
 - [Build status](#build-status)
 - [Part overview](#part-overview)
+- [Connection Diagram](#connection-diagram)
 - [Installation](#installation)
 - [Setting up the firmware](#setting-up-the-firmware)
 - [Calibration](#calibration)
@@ -29,23 +30,23 @@ ROS 2 Distro | Branch | Build status
 
 If you're planning on building a robot, you'll be requiring an amount of components. This will give an overview and sort of checklist to see if you haven't missed anything when gathering the hardware. Each of these parts will have their supported options explained direclty below this list: 
 
-- Wheels
-- Motor drivers
-- Motors
-- Ineartial Measurement Unit (IMU)
-- Laser sensor
-- Depth sensor
-- Micro controller
-- Robot computer
-- Battery
-- Robot body
+- [Wheels](#1-robot-types-and-orientation)
+- [Motor drivers](#2-motor-drivers)
+- [Motors](#3-motors)
+- [Ineartial Measurement Unit (IMU)](#4-inertial-measurement-unit--imu-)
+- [Laser sensor](#5-laser-sensor)
+- [Depth sensor](#6-depth-sensor)
+- [Micro controller](#7-micro-controller)
+- [Robot computer](#8-robot-computer)
+- [Battery](#9-battery)
+- [Robot body](#10-robot-body)
 - Connection cables
 
-### 1.1 Robot types and orientation
+### 1. Robot types and orientation
 There are 3 different types of robots
-- 2 Wheel drive (2WD)
-- 4 Wheel drive (4WD)
-- Mecanum
+- 2 Wheel drive (2WD), 2 wheels + 1/2 caster wheels
+- 4 Wheel drive (4WD), 4 wheels
+- Mecanum, 4 mecanum wheels (omnidirectional)
 
 Robot Orientation:
 
@@ -66,7 +67,7 @@ The image below shows the top view of a robot. In case of mecanum wheels, it als
 
 ![mecanum_wheels_orientation](docs/mecanum_wheels_orientation.png)
 
-### 1.2 Motor Drivers
+### 2. Motor Drivers
 
 Supported Motor Drivers:
 
@@ -80,12 +81,12 @@ Supported Motor Drivers:
 
 The motor drivers are configurable from the config file explained in the later part of this document.
 
-### 1.3 Motors
+### 3. Motors
 
 The motors will be powered through the motor drivers, this means there are no set requirements besides from them having encoders. Encoders allow the robot to more precisely measure the rotations of the wheels wheels allows the positioning and wayfinding to be more accurate. 
 Make sure the motor drivers can handle the amount of voltage and current the motors will need. In most cases each motor needs a driver to be used. Some drivers however, can handle 2 motors at once. 
 
-### 1.4 Inertial Measurement Unit (IMU)
+### 4. Inertial Measurement Unit (IMU)
 
 The IMU is responsible for measuring the speed and direction at which the robot is moving. Together with the motor encoders it'll determine the current place the robot is within the area.
 Supported IMUs:
@@ -95,7 +96,7 @@ Supported IMUs:
 - **MPU9150**
 - **MPU9250**
 
-### 1.5 Laser sensor
+### 5. Laser sensor
 
 This is the sensor that'll be used to scan the surrouding area of the robot to be able to create a map. The supported options are:
 
@@ -111,7 +112,7 @@ This is the sensor that'll be used to scan the surrouding area of the robot to b
 
 Sensors marked with an asterisk are depth sensors. If a depth sensor is used as a laser sensor, the launch files will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser scans. It is prefered to use an actual laser sensor with a 360° view, meaning the ones listed above without the asterisk.
 
-### 1.6 Depth sensor
+### 6. Depth sensor
 
 This sensor will be mounted to the very front of the robot to give a view of what it's facing. The options that're supported are as follows:
 
@@ -124,7 +125,7 @@ This sensor will be mounted to the very front of the robot to give a view of wha
 - [OAK D Lite](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1)
 - [OAK-D Pro](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-pro)
 
-### 1.7 Micro controller
+### 7. Micro controller
 
 The micro controller will be responsible for the motors and and IMU. The ones that're supported are:
 
@@ -134,7 +135,7 @@ The micro controller will be responsible for the motors and and IMU. The ones th
 - Teensy 4.0
 - Teensy 4.1
 
-### 1.8 Robot computer
+### 8. Robot computer
 
 This is what will be running the ROS2 package and uploads the necessary files to the micro controller. Later on a connection will be set up for you to be able to interact with this remotely. The ones that're supported are: 
 
@@ -144,17 +145,17 @@ This is what will be running the ROS2 package and uploads the necessary files to
 - Odroid XU4
 - Radxa Rock Pro
 
-### 1.9 Battery
+### 9. Battery
 
 The battery of the robot has no requirements which means anything can be used as long as it gives enough power for the robot to run. For ease of use, make sure it's either rechargeable or easily accessible to be able to swap it in case it's empty.
 In case you're building a robot which doesn't use 5V for the motors it's neccesary to create a way to both power the robot computer and the motors. This can be done with, for example, a stepdown converter. There's also a posibility to add a switch to the robot, this can then be used to turn the power to the robot computer on and off.
 
-### 1.10 Robot body
+### 10. Robot body
 
 For this there are no set requirements either, in essence everyone creates their own variant on the Linorobot2. This means everyone has a different robot designed for their own needs. When it comes to deciding on what to use for the robot's body, it's good to think about the necessary space that's required for the selected hardware. Also something to keep in mind is to be able to attach the motors and sensors to the robot in a way that they're not able to move from their position.
 
 
-### 2 Connection Diagram
+## Connection Diagram
 Below are connection diagrams you can follow for each supported motor driver and IMU. For simplicity, only one motor connection is provided but the same diagram can be used to connect the rest of the motors. You are free to decide which microcontroller pin to use just ensure that the following are met:
 
 - Reserve SCL0 and SDA0 (pins 18 and 19 on Teensy boards) for IMU.
@@ -165,19 +166,19 @@ Alternatively, you can also use the pre-defined pin assignments in lino_base_con
 
 All diagrams below are based on Teensy 4.0 microcontroller and GY85 IMU. Click the images for higher resolution.
 
-#### 2.1 GENERIC 2 IN
+#### 1. GENERIC 2 IN
 
 ![generic_2_in_connection](docs/generic_2_in_connection.png)
 
-#### 2.2 GENERIC 1 IN
+#### 2. GENERIC 1 IN
 
 ![generic_1_in_connection](docs/generic_1_in_connection.png)
 
-#### 2.3 BTS7960
+#### 3. BTS7960
 
 ![bts7960_connection](docs/bts7960_connection.png)
 
-#### 2.4 IMU
+#### 4. IMU
 
 ![imu_connection](docs/imu_connection.png)
 
@@ -187,7 +188,7 @@ Take note of the IMU's correct orientation when mounted on the robot. Ensure tha
 - **Y** - Left
 - **Z** - Up
 
-#### 2.5 System Diagram
+#### 5. System Diagram
 Reference designs you can follow in building your robot.
 
 A minimal setup with a 5V powered robot computer.
