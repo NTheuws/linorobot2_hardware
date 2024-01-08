@@ -7,8 +7,8 @@ Since this is a DIY robot, the hardware will have to be selected yourself. Howev
 ## Table of Contents  
 - [Linorobot2](#linorobot2)
 - [Build status](#build-status)
-- [Part overview](#part-overview)
-- [Connection Diagram](#connection-diagram)
+- [Required hardware](#required-hardware)
+- [Building the robot](#building-the-robot)
 - [Installation](#installation)
 - [Setting up the firmware](#setting-up-the-firmware)
 - [Calibration](#calibration)
@@ -26,7 +26,7 @@ ROS 2 Distro | Branch | Build status
 **Galactic** | [`galactic`](../../tree/galactic) | [![Galactic Firmware Build](../../actions/workflows/galactic-firmware-build.yml/badge.svg?branch=galactic)](../../actions/workflows/galactic-firmware-build.yml?branch=galactic)
 **Foxy** | [`foxy`](../../tree/foxy) | [![Foxy Firmware Build](../../actions/workflows/foxy-firmware-build.yml/badge.svg?branch=foxy)](../../actions/workflows/foxy-firmware-build.yml?branch=foxy)
 
-## Part overview
+## Required hardware
 
 If you're planning on building a robot, you'll be requiring an amount of components. This will give an overview and sort of checklist to see if you haven't missed anything when gathering the hardware. Each of these parts will have their supported options explained direclty below this list: 
 
@@ -154,8 +154,13 @@ In case you're building a robot which doesn't use 5V for the motors it's neccesa
 
 For this there are no set requirements either, in essence everyone creates their own variant on the Linorobot2. This means everyone has a different robot designed for their own needs. When it comes to deciding on what to use for the robot's body, it's good to think about the necessary space that's required for the selected hardware. Also something to keep in mind is to be able to attach the motors and sensors to the robot in a way that they're not able to move from their position.
 
+### 11. After gathering the hardware
 
-## Connection Diagram
+Once all the [required hardware from the list](#required-hardware) has been gathered, the next step wil be to continue with building the actual robot. This can be done by following the examples below.
+
+## Building the robot
+Since every robot will be built using different hardware, it's impossible to create a step by step guide on how to wire up the robot from start to finish. As a way to help out with this process anyway, there will be examples available which use optional components. In case you're using the same parts, it'll be easier to follow these examples. If this isn't the case, find a datasheet of the hardware component(s) and compare it to the examples provided. This way it'll be easier to spot the differences and solve it.
+
 Below are connection diagrams you can follow for each supported motor driver and IMU. For simplicity, only one motor connection is provided but the same diagram can be used to connect the rest of the motors. You are free to decide which microcontroller pin to use just ensure that the following are met:
 
 - Reserve SCL0 and SDA0 (pins 18 and 19 on Teensy boards) for IMU.
