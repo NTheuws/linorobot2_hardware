@@ -200,6 +200,9 @@ A more advanced setup with a 19V powered computer and USB hub connected to senso
 For bigger robots, you can add an emergency switch in between the motor drivers' power supply and motor drivers.
 
 ## Installation
+
+Before continuing here, make sure you've finished up until [hardware and robot firmware](https://github.com/NTheuws/linorobot2_software/tree/humble#hardware-and-robot-firmware). In case you've gone through the installation steps and have been refered here, continue with the steps below.
+
 All software mentioned in this guide must be installed on the robot computer.
 
 ### 1. Linux
